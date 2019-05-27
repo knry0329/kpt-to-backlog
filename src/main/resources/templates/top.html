@@ -1,0 +1,113 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>KPT on Backlog</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/index.css" th:href="@{/css/index.css}">
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+  <link rel="stylesheet" type="text/css" href="/css/top.css" th:href="@{/css/top.css}">
+  </head>
+  <body>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <a class="navbar-brand" href="#">KPT on Backlog</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- <main role="main" class="container"> -->
+
+<!--   <div class="starter-template"> -->
+<!--     <h1>Bootstrap starter template</h1> -->
+<!--     <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p> -->
+<!--   </div> -->
+
+<div class="split-box left-box" th:inline="text">
+  <div class="left-up-box kptbox" th:id="${kptIdMap.KEEP}">
+    <h3>keep</h3>
+    <div class="issuebox" th:each="ele, eleStat : ${kptList.keepList}" th:if="${ele.status.name}!='完了'">
+      <p class="issue-key">[[${ele.issueKey}]]</p>
+      <p class="issue-description" >[[${ele.summary}]]</p>
+      <p class="issue-title"><i class="fas fa-user"></i>&nbsp;[[${ele.createdUser.name}]]</p>
+    </div>
+<!--     </div> -->
+  </div>
+  <div class="left-down-box kptbox" th:id="${kptIdMap.PROBLEM}">
+    <h3>problem</h3>
+    <div class="issuebox" th:each="ele, eleStat : ${kptList.problemList}" th:if="${ele.status.name}!='完了'">
+      <p class="issue-key">[[${ele.issueKey}]]</p>
+      <p class="issue-description" >[[${ele.summary}]]</p>
+      <p class="issue-title"><i class="fas fa-user"></i>&nbsp;[[${ele.createdUser.name}]]</p>
+    </div>
+  </div>
+</div>
+<div class="split-box right-box kptbox" th:id="${kptIdMap.TRY}" th:inline="text">
+  <h3>try</h3>
+    <div class="issuebox" th:each="ele, eleStat : ${kptList.tryList}" th:if="${ele.status.name}!='完了'">
+<!--       <th:block th:if="${ele.status.name}!='完了'"> -->
+      <p class="issue-key">[[${ele.issueKey}]]</p>
+      <p class="issue-description" >[[${ele.summary}]]</p>
+      <p class="issue-title"><i class="fas fa-user"></i>&nbsp;[[${ele.createdUser.name}]]</p>
+<!--       </th:block> -->
+    </div>
+</div>  
+
+<section id="modalArea" class="modalArea">
+  <div id="modalBg" class="modalBg"></div>
+  <div class="modalWrapper">
+    <div class="modalContents">
+      <h2 id="modalTitle"></h2>
+      <p id="inputUser" class="issue-title"></p>
+      <form class="form-issue" id="form-issue" action="/issue" th:action="@{/issue}" th:object="${issueForm}" method="post">
+      <div class="form-group">
+        <label for="inputSummary" class="topLabel">題名(summary)</label>
+        <input type="text" name="summary" value="" id="inputSummary" class="form-control" placeholder=""required>
+     </div>
+      <div class="form-group">
+        <label for="inputDescription" class="topLabel">詳細(description)</label>
+        <textarea name="description" id="inputDescription" class="form-control" placeholder=""required></textarea>
+     </div>
+      <div class="form-group">
+        <label for="inputStatus" class="topLabel">ステータス(status)</label>
+        <select class="form-control" id="inputStatus" name="status" multiple="multiple" disabled="disabled">
+          <option th:each="status : ${statusList}" th:value="${status.id}" th:text="${status.name}"></option>
+        </select>
+     </div>
+      <div class="form-group">
+        <label for="inputCategory" class="topLabel">カテゴリ(category)</label>
+        <select class="form-control" id="inputCategory" name="category" multiple="multiple" required>
+          <option th:each="category : ${categoryList}" th:value="${category.id}" th:text="${category.name}"></option>
+        </select>
+     </div>
+       <button class="btn btn-lg btn-primary btn-block" type="submit">Regist</button>
+      </form>
+
+    </div>
+    <div id="closeModal" class="closeModal">
+      ×
+    </div>
+  </div>
+</section>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type='text/javascript' th:src="@{/js/top.js}" src="/js/top.js"></script>
+  </body>
+</html>

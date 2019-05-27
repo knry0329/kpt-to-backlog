@@ -1,0 +1,15 @@
+server:
+  port: 8080
+  servlet:
+    session:
+      timeout: 2400
+
+spring:
+  thymeleaf:
+    enabled: true
+    cache: false
+  datasource:
+    url: jdbc:postgresql://ec2-174-129-240-67.compute-1.amazonaws.com:5432/d17iqq22gra793
+    username: wlbuzydpszspps
+    password: bfd039f2bd28a047dbb2e411f6fdf6bbf20ced8dce54078d4ca28f8e7c2d525f
+    driver-class-name: org.postgresql.Driver
