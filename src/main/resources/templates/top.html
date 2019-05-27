@@ -1,20 +1,20 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Jekyll v3.8.5">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors" />
+    <meta name="generator" content="Jekyll v3.8.5" />
     <title>KPT on Backlog</title>
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="/css/index.css" th:href="@{/css/index.css}">
-    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="/css/index.css" th:href="@{/css/index.css}" />
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet" />
 
     <!-- Custom styles for this template -->
-  <link rel="stylesheet" type="text/css" href="/css/top.css" th:href="@{/css/top.css}">
+  <link rel="stylesheet" type="text/css" href="/css/top.css" th:href="@{/css/top.css}" />
   </head>
   <body>
   <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
@@ -78,11 +78,11 @@
       <form class="form-issue" id="form-issue" action="/issue" th:action="@{/issue}" th:object="${issueForm}" method="post">
       <div class="form-group">
         <label for="inputSummary" class="topLabel">題名(summary)</label>
-        <input type="text" name="summary" value="" id="inputSummary" class="form-control" placeholder=""required>
+        <input type="text" name="summary" value="" id="inputSummary" class="form-control" placeholder="" required="required" />
      </div>
       <div class="form-group">
         <label for="inputDescription" class="topLabel">詳細(description)</label>
-        <textarea name="description" id="inputDescription" class="form-control" placeholder=""required></textarea>
+        <textarea name="description" id="inputDescription" class="form-control" placeholder="" required="required"></textarea>
      </div>
       <div class="form-group">
         <label for="inputStatus" class="topLabel">ステータス(status)</label>
@@ -92,7 +92,7 @@
      </div>
       <div class="form-group">
         <label for="inputCategory" class="topLabel">カテゴリ(category)</label>
-        <select class="form-control" id="inputCategory" name="category" multiple="multiple" required>
+        <select class="form-control" id="inputCategory" name="category" multiple="multiple" required="required">
           <option th:each="category : ${categoryList}" th:value="${category.id}" th:text="${category.name}"></option>
         </select>
      </div>
