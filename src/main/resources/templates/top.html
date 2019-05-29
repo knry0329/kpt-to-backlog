@@ -24,11 +24,16 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav mr-auto col-md-11">
       <li class="nav-item active">
         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
     </ul>
+<!--     <ul class="navbar-nav mr-auto col-md-1" th:inline="text"> -->
+<!--       <li class="nav-item active"> -->
+<!--         <a class="nav-link" href="#"> <i class="fas fa-user"></i>&nbsp;&nbsp;ddd</a> -->
+<!--       </li> -->
+<!--     </ul> -->
   </div>
 </nav>
 
@@ -40,27 +45,27 @@
 <!--   </div> -->
 
 <div class="split-box left-box" th:inline="text">
-  <div class="left-up-box kptbox" th:id="${kptIdMap.KEEP}">
+  <div class="left-up-box kptbox KEEP" th:id="${kptIdMap.KEEP}">
     <h3>keep</h3>
-    <div class="issuebox" th:each="ele, eleStat : ${kptList.keepList}" th:if="${ele.status.name}!='完了'">
+    <div class="issuebox issue-keep" th:each="ele, eleStat : ${kptList.keepList}" th:if="${ele.status.name}!='完了'" th:id="${ele.issueKey}">
       <p class="issue-key">[[${ele.issueKey}]]</p>
       <p class="issue-description" >[[${ele.summary}]]</p>
       <p class="issue-title"><i class="fas fa-user"></i>&nbsp;[[${ele.createdUser.name}]]</p>
     </div>
 <!--     </div> -->
   </div>
-  <div class="left-down-box kptbox" th:id="${kptIdMap.PROBLEM}">
+  <div class="left-down-box kptbox PROBLEM" th:id="${kptIdMap.PROBLEM}">
     <h3>problem</h3>
-    <div class="issuebox" th:each="ele, eleStat : ${kptList.problemList}" th:if="${ele.status.name}!='完了'">
+    <div class="issuebox issue-problem" th:each="ele, eleStat : ${kptList.problemList}" th:if="${ele.status.name}!='完了'" th:id="${ele.issueKey}">
       <p class="issue-key">[[${ele.issueKey}]]</p>
       <p class="issue-description" >[[${ele.summary}]]</p>
       <p class="issue-title"><i class="fas fa-user"></i>&nbsp;[[${ele.createdUser.name}]]</p>
     </div>
   </div>
 </div>
-<div class="split-box right-box kptbox" th:id="${kptIdMap.TRY}" th:inline="text">
+<div class="split-box right-box kptbox TRY" th:id="${kptIdMap.TRY}" th:inline="text">
   <h3>try</h3>
-    <div class="issuebox" th:each="ele, eleStat : ${kptList.tryList}" th:if="${ele.status.name}!='完了'">
+    <div class="issuebox issue-try" th:each="ele, eleStat : ${kptList.tryList}" th:if="${ele.status.name}!='完了'" th:id="${ele.issueKey}">
 <!--       <th:block th:if="${ele.status.name}!='完了'"> -->
       <p class="issue-key">[[${ele.issueKey}]]</p>
       <p class="issue-description" >[[${ele.summary}]]</p>
@@ -105,6 +110,12 @@
     </div>
   </div>
 </section>
+    <script  th:inline="javascript">
+    /*<![CDATA[*/
+	var statusList = /*[[${statusList}]]*/ null;
+	var categoryList = /*[[${categoryList}]]*/ null;
+	/*]]>*/
+	</script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

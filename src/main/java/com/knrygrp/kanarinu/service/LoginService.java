@@ -32,7 +32,6 @@ public class LoginService {
 		if(project == null) {
 			throw new KPTException("認証エラー");
 		}
-		
 		session.setAttribute("loginForm", form);
 		
 	}

@@ -145,3 +145,15 @@ body {
     font-size: 3.5rem;
   }
 }
+
+.KEEP {
+	background:linear-gradient(#FFE5D2, #F6A56A)
+}
+
+.PROBLEM {
+	background:linear-gradient(#FCFFD7, #F3FE62)
+}
+
+.TRY {
+	background:linear-gradient(#D7FFF9, #62FEE8)
+}
