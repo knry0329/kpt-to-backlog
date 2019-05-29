@@ -24,16 +24,21 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-    <ul class="navbar-nav mr-auto col-md-11">
+    <ul class="navbar-nav mr-auto col-md-10">
       <li class="nav-item active">
         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
     </ul>
-<!--     <ul class="navbar-nav mr-auto col-md-1" th:inline="text"> -->
-<!--       <li class="nav-item active"> -->
-<!--         <a class="nav-link" href="#"> <i class="fas fa-user"></i>&nbsp;&nbsp;ddd</a> -->
-<!--       </li> -->
-<!--     </ul> -->
+    <ul class="navbar-nav mr-auto col-md-1" th:inline="text">
+      <li class="nav-item active">
+        <a class="nav-link"> Space:&nbsp;[[${session.loginForm.spacekey}]]</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav mr-auto col-md-1" th:inline="text">
+      <li class="nav-item active">
+        <a class="nav-link"> Project:&nbsp;[[${session.loginForm.projectkey}]]</a>
+      </li>
+    </ul>
   </div>
 </nav>
 
