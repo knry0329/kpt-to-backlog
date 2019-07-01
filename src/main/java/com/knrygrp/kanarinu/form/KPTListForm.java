@@ -2,29 +2,31 @@ package com.knrygrp.kanarinu.form;
 
 import java.util.List;
 
-import com.nulabinc.backlog4j.Issue;
+import com.knrygrp.kanarinu.dto.IssueDto;
+
+//import com.nulabinc.backlog4j.IssueDto;
 
 public class KPTListForm {
 
-	private List<Issue> keepList;
-	private List<Issue> problemList;
-	private List<Issue> tryList;
-	public List<Issue> getKeepList() {
+	private List<IssueDto> keepList;
+	private List<IssueDto> problemList;
+	private List<IssueDto> tryList;
+	public List<IssueDto> getKeepList() {
 		return keepList;
 	}
-	public void setKeepList(List<Issue> keepList) {
+	public void setKeepList(List<IssueDto> keepList) {
 		this.keepList = keepList;
 	}
-	public List<Issue> getProblemList() {
+	public List<IssueDto> getProblemList() {
 		return problemList;
 	}
-	public void setProblemList(List<Issue> problemList) {
+	public void setProblemList(List<IssueDto> problemList) {
 		this.problemList = problemList;
 	}
-	public List<Issue> getTryList() {
+	public List<IssueDto> getTryList() {
 		return tryList;
 	}
-	public void setTryList(List<Issue> tryList) {
+	public void setTryList(List<IssueDto> tryList) {
 		this.tryList = tryList;
 	}
 	

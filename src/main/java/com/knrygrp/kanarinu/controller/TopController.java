@@ -3,6 +3,8 @@ package com.knrygrp.kanarinu.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,19 +13,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.knrygrp.kanarinu.dto.CategoryDto;
+import com.knrygrp.kanarinu.dto.IssueDto;
+import com.knrygrp.kanarinu.dto.StatusDto;
 import com.knrygrp.kanarinu.form.IssueForm;
 import com.knrygrp.kanarinu.form.KPTListForm;
+import com.knrygrp.kanarinu.form.LoginForm;
 import com.knrygrp.kanarinu.service.TopService;
-import com.nulabinc.backlog4j.Category;
-import com.nulabinc.backlog4j.Issue;
-import com.nulabinc.backlog4j.ResponseList;
-import com.nulabinc.backlog4j.Status;
 
 @Controller
 public class TopController {
 	
 	@Autowired
 	TopService topService;
+	@Autowired
+	HttpSession session;
+
 	
 	/**
 	 * TOP画面初期表示
@@ -33,14 +38,17 @@ public class TopController {
 	@RequestMapping(value = "/top", method = RequestMethod.GET)
 	public String top(Model model) {
 		
+		LoginForm loginForm = (LoginForm)session.getAttribute("loginForm");
+		//TODO loginFormが取得できなかった場合、エラー遷移
+
 		//画面上でパースしやすいように
 		//KEEP,TRY,PROBLEMごとにインスタンス作成
-		ResponseList<Issue> responseList = topService.getResponseList();
-		KPTListForm kptList = topService.getKptList(responseList);
+		List<IssueDto> issueList = topService.getIssueList(loginForm);
+		KPTListForm kptList = topService.getKptList(issueList);
 		model.addAttribute("kptList", kptList);
-		List<Status> statusList = topService.getStatuses();
+		List<StatusDto> statusList = topService.getStatuses(loginForm);
 		model.addAttribute("statusList", statusList);
-		List<Category> categoryList = topService.getCategories();
+		List<CategoryDto> categoryList = topService.getCategories(loginForm);
 		model.addAttribute("categoryList", categoryList);
 		Map<String, Long> kptIdMap = topService.getKptIdMap(categoryList);
 		model.addAttribute("kptIdMap", kptIdMap);
@@ -61,8 +69,9 @@ public class TopController {
 			@PathVariable("issueKey") String issueKey, 
 			@ModelAttribute("issueForm") IssueForm issueForm, 
 			Model model) {
-		
-		topService.updateIssue(issueKey, issueForm);
+		LoginForm loginForm = (LoginForm)session.getAttribute("loginForm");
+
+		topService.updateIssue(loginForm, issueKey, issueForm);
 		
 		return "redirect:/top";
 	}
@@ -77,8 +86,9 @@ public class TopController {
 	public String RegistIssue(
 			@ModelAttribute("issueForm") IssueForm issueForm, 
 			Model model) {
+		LoginForm loginForm = (LoginForm)session.getAttribute("loginForm");
 		
-		topService.registIssue(issueForm);
+		topService.registIssue(loginForm, issueForm);
 		
 		return "redirect:/top";
 	}
