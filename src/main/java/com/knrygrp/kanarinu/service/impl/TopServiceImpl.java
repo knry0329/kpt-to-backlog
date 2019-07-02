@@ -26,29 +26,21 @@ public class TopServiceImpl implements TopService {
 	ProjectAPI projectAPI;
 
 	/**
-	 * 課題を登録します。
-	 * @param issueForm
+	 * {@inheritDoc}
 	 */
 	public void registIssue(LoginForm loginForm, IssueForm issueForm) {
-//		LoginForm loginForm = (LoginForm)session.getAttribute("loginForm");
-//		BacklogAPI backlogAPI = new BacklogAPI();
 		projectAPI.registIssue(issueForm, loginForm);
 	}
 
 	/**
-	 * 課題の更新を実行します。
-	 * @param issueKey
-	 * @param issueForm
+	 * {@inheritDoc}
 	 */
 	public void updateIssue(LoginForm loginForm, String issueKey, IssueForm issueForm) {
-//		BacklogAPI backlogAPI = new BacklogAPI();
 		projectAPI.updateIssue(issueKey, issueForm, loginForm);
 	}
 
 	/**
-	 * 課題をKEEP,PROBLEM,TRYに分解したListを取得します。
-	 * @param issueList
-	 * @return
+	 * {@inheritDoc}
 	 */
 	public KPTListForm getKptList(List<IssueDto> issueList) {
 		KPTListForm ret = new KPTListForm();
@@ -62,7 +54,6 @@ public class TopServiceImpl implements TopService {
 					.map(s -> s.getName())
 					.collect(Collectors.toList());
 
-			//TODO KEEP,Keep,keepも許可する
 			if(nameList.contains(KTBConstants.KEEP)) {
 				retKeepList.add(i);
 			}
@@ -80,37 +71,29 @@ public class TopServiceImpl implements TopService {
 	}
 
 	/**
-	 * ステータス一覧を取得します。
-	 * @return
+	 * {@inheritDoc}
 	 */
 	public List<StatusDto> getStatuses(LoginForm loginForm) {
-//		BacklogAPI backlogAPI = new BacklogAPI();
 		return projectAPI.getStatuses(loginForm);
 	}
 
 	/**
-	 * カテゴリー一覧を取得します。
-	 * @return
+	 * {@inheritDoc}
 	 */
 	public List<CategoryDto> getCategories(LoginForm loginForm) {
-//		BacklogAPI backlogAPI = new BacklogAPI();
 		return projectAPI.getCategories(loginForm);
 	}
 
 	
 	/**
-	 * 課題一覧を取得します。
-	 * @return
+	 * {@inheritDoc}
 	 */
 	public List<IssueDto> getIssueList(LoginForm loginForm) {
-//		BacklogAPI backlogAPI = new BacklogAPI();
 		return projectAPI.getIssueList(loginForm);
 	}
 		
 	/**
-	 * カテゴリーの名称とIDのMapオブジェクトを取得します。
-	 * @param categoryList
-	 * @return
+	 * {@inheritDoc}
 	 */
 	public Map<String, Long> getKptIdMap(List<CategoryDto> categoryList) {
 		Map<String, Long> kptIdMap = new HashMap<String, Long>();
@@ -121,9 +104,7 @@ public class TopServiceImpl implements TopService {
 	}
 
 	/**
-	 * ステータスの名称とIDのMapオブジェクトを取得します。
-	 * @param statusList
-	 * @return
+	 * {@inheritDoc}
 	 */
 	public Map<String, Integer> getKptStatusMap(List<StatusDto> statusList) {
 		Map<String, Integer> kptStatusMap = new HashMap<String, Integer>();
@@ -132,6 +113,4 @@ public class TopServiceImpl implements TopService {
 		}
 		return kptStatusMap;
 	}
-
-
 }

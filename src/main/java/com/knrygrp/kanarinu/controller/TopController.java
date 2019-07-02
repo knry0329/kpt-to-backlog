@@ -3,8 +3,6 @@ package com.knrygrp.kanarinu.controller;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.knrygrp.kanarinu.dto.CategoryDto;
 import com.knrygrp.kanarinu.dto.IssueDto;
@@ -22,13 +21,11 @@ import com.knrygrp.kanarinu.form.LoginForm;
 import com.knrygrp.kanarinu.service.TopService;
 
 @Controller
+@SessionAttributes(names="loginForm")
 public class TopController {
 	
 	@Autowired
 	TopService topService;
-	@Autowired
-	HttpSession session;
-
 	
 	/**
 	 * TOP画面初期表示
@@ -36,13 +33,12 @@ public class TopController {
 	 * @return
 	 */
 	@RequestMapping(value = "/top", method = RequestMethod.GET)
-	public String top(Model model) {
-		
-		LoginForm loginForm = (LoginForm)session.getAttribute("loginForm");
-		//TODO loginFormが取得できなかった場合、エラー遷移
+	public String top(Model model, @ModelAttribute("loginForm") LoginForm loginForm) {
 
-		//画面上でパースしやすいように
-		//KEEP,TRY,PROBLEMごとにインスタンス作成
+		/*
+		 * 画面上でパースしやすいように
+		 * KEEP,TRP,PROBLEMごとにインスタンス作成
+		 */
 		List<IssueDto> issueList = topService.getIssueList(loginForm);
 		KPTListForm kptList = topService.getKptList(issueList);
 		model.addAttribute("kptList", kptList);
@@ -68,11 +64,9 @@ public class TopController {
 	public String updateIssue(
 			@PathVariable("issueKey") String issueKey, 
 			@ModelAttribute("issueForm") IssueForm issueForm, 
-			Model model) {
-		LoginForm loginForm = (LoginForm)session.getAttribute("loginForm");
-
+			Model model, 
+			@ModelAttribute("loginForm") LoginForm loginForm) {
 		topService.updateIssue(loginForm, issueKey, issueForm);
-		
 		return "redirect:/top";
 	}
 
@@ -85,11 +79,9 @@ public class TopController {
 	@RequestMapping(value = "/issue", method = RequestMethod.POST)
 	public String RegistIssue(
 			@ModelAttribute("issueForm") IssueForm issueForm, 
-			Model model) {
-		LoginForm loginForm = (LoginForm)session.getAttribute("loginForm");
-		
+			Model model, 
+			@ModelAttribute("loginForm") LoginForm loginForm) {
 		topService.registIssue(loginForm, issueForm);
-		
 		return "redirect:/top";
 	}
 

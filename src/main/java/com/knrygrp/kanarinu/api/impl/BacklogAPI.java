@@ -41,10 +41,7 @@ public class BacklogAPI implements ProjectAPI {
 
 
 	/**
-	 * 課題を更新します。
-	 * @param issueKey
-	 * @param issueForm
-	 * @param loginForm
+	 * {@inheritDoc}
 	 */
 	public void updateIssue(String issueKey, IssueForm issueForm, LoginForm loginForm) {
 		BacklogClient blc = this.getBacklogClient(loginForm.getApikey(), loginForm.getSpacekey());
@@ -64,9 +61,7 @@ public class BacklogAPI implements ProjectAPI {
 	}
 
 	/**
-	 * 課題を登録します。
-	 * @param issueForm
-	 * @param loginForm
+	 * {@inheritDoc}
 	 */
 	public void registIssue(IssueForm issueForm, LoginForm loginForm) {
 		BacklogClient blc = this.getBacklogClient(loginForm.getApikey(), loginForm.getSpacekey());
@@ -87,10 +82,7 @@ public class BacklogAPI implements ProjectAPI {
 	}
 	
 	/**
-	 * 課題キーから課題情報の取得
-	 * @param blc
-	 * @param issueKey
-	 * @return
+	 * {@inheritDoc}
 	 */
 	public IssueDto getIssue(LoginForm loginForm, String issueKey) {
 		BacklogClient blc = this.getBacklogClient(loginForm.getApikey(), loginForm.getSpacekey());
@@ -103,9 +95,7 @@ public class BacklogAPI implements ProjectAPI {
 	}
 	
 	/**
-	 * 課題一覧の取得
-	 * @param loginForm
-	 * @return
+	 * {@inheritDoc}
 	 */
 	public List<IssueDto> getIssueList(LoginForm loginForm) {
 		BacklogClient blc = this.getBacklogClient(loginForm.getApikey(), loginForm.getSpacekey());
@@ -118,11 +108,8 @@ public class BacklogAPI implements ProjectAPI {
 		return this.parseIssueList(rl);
 	}
 
-
 	/**
-	 * ステータスを取得します。
-	 * @param form
-	 * @return
+	 * {@inheritDoc}
 	 */
 	public List<StatusDto> getStatuses(LoginForm form) {
 		BacklogClient blc = this.getBacklogClient(form.getApikey(), form.getSpacekey());
@@ -132,9 +119,7 @@ public class BacklogAPI implements ProjectAPI {
 	}
 
 	/**
-	 * カテゴリーを取得します。
-	 * @param form
-	 * @return
+	 * {@inheritDoc}
 	 */
 	public List<CategoryDto> getCategories(LoginForm form) {
 		BacklogClient blc = this.getBacklogClient(form.getApikey(), form.getSpacekey());
@@ -145,9 +130,7 @@ public class BacklogAPI implements ProjectAPI {
 	}
 
 	/**
-	 * プロジェクトの存在チェック
-	 * @param form
-	 * @return
+	 * {@inheritDoc}
 	 */
 	public boolean projectExistCheck(LoginForm form) {
 		BacklogClient blc = this.getBacklogClient(form.getApikey(), form.getSpacekey());

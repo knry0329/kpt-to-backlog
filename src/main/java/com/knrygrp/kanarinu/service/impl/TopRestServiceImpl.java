@@ -16,12 +16,9 @@ public class TopRestServiceImpl implements TopRestService {
 	ProjectAPI projectAPI;
 
 	/**
-	 * 課題のキーから、課題オブジェクトを取得します。
-	 * @param issueKey
-	 * @return
+	 * {@inheritDoc}
 	 */
 	public IssueDto getIssue (LoginForm loginForm, String issueKey) {
-//		BacklogAPI backlogAPI = new BacklogAPI();
 		return projectAPI.getIssue(loginForm, issueKey);
 	}
 

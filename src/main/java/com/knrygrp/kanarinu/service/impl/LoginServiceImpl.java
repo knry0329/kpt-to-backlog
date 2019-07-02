@@ -1,11 +1,10 @@
 package com.knrygrp.kanarinu.service.impl;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.knrygrp.kanarinu.api.impl.BacklogAPI;
+import com.knrygrp.kanarinu.api.ProjectAPI;
+import com.knrygrp.kanarinu.constants.KTBConstants;
 import com.knrygrp.kanarinu.exception.KPTException;
 import com.knrygrp.kanarinu.form.LoginForm;
 import com.knrygrp.kanarinu.service.LoginService;
@@ -14,23 +13,15 @@ import com.knrygrp.kanarinu.service.LoginService;
 public class LoginServiceImpl implements LoginService {
 		
 	@Autowired
-	HttpSession session;
+	ProjectAPI projectAPI;
 
 	/**
-	 * APIKEY、スペースキー、プロジェクトキーをもとに存在チェックを実施する。
-	 * 存在しない場合、独自例外をThrowする。
-	 * @param form
-	 * @throws KPTException
+	 * {@inheritDoc}
 	 */
 	public void login(LoginForm form) throws KPTException {
-		
-		//TODO new する時点でAPIKEYをわたす
-		BacklogAPI backlogAPI = new BacklogAPI();
-		if(!backlogAPI.projectExistCheck(form)) {
-			throw new KPTException("認証エラー");
+		if(!projectAPI.projectExistCheck(form)) {
+			throw new KPTException(KTBConstants.MSG_SIGNIN_FAILED);
 		}
-		session.setAttribute("loginForm", form);
-		
 	}
 
 }

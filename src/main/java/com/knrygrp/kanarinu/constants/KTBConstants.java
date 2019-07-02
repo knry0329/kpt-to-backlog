@@ -13,5 +13,7 @@ public class KTBConstants {
 	public static final String DEFAULT_PRIORITY = "中";
 	public static final String DEFAULT_REGIST_COMMENT = "Updated On KPT on Backlog.";
 	
+	public static final String MSG_SIGNIN_FAILED = "Sign in failed.";
+	
 	
 }
